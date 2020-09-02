@@ -130,6 +130,8 @@ define apt::source(
     ensure        => $ensure,
     content       => "${header}${sourcelist}",
     notify_update => $notify_update,
+    # Ensure settings are set before sources are purged
+    before        => File['sources.list'],
   }
 
   if $pin {
